@@ -8,7 +8,7 @@ EXPOSE 8081
 
 COPY src/nginx.conf /etc/nginx/nginx.conf
 COPY src/default.conf /etc/nginx/conf.d/default.conf
-COPY src/dist /usr/share/nginx/html
+COPY dist /usr/share/nginx/html
 
 USER nginx
 
