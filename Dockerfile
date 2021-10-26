@@ -1,4 +1,4 @@
-FROM registry.redhat.io/rhel8/nginx-116:latest
+FROM image-registry.openshift-image-registry.svc:5000/openshift/nginx:latest
 
 USER root
 
