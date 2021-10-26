@@ -1,0 +1,68 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: beer-rec-app
+  name: beer-rec-app
+  namespace: beer-rec-system
+  annotations:
+    argocd.argoproj.io/sync-wave: "2"
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: beer-rec-app
+  template:
+    metadata:
+      labels:
+        app: beer-rec-app
+    spec:
+      containers:
+      - image: image-registry.openshift-image-registry.svc:5000/beer-rec-system/beer-rec-app:latest
+        name: beer-rec-app
+        ports:
+          - containerPort: 8081
+        env:
+          - name: BACKEND
+            value: "beer-rec-rest-api.beer-rec-system:5000"
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: beer-rec-app
+  name: beer-rec-app
+  namespace: beer-rec-system
+  annotations:
+    argocd.argoproj.io/sync-wave: "2"
+spec:
+  ports:
+  - name: ports
+    port: 8081
+    protocol: TCP
+    targetPort: 8081
+  selector:
+    app: beer-rec-app
+  type: ClusterIP
+---
+
+kind: Route
+apiVersion: route.openshift.io/v1
+metadata:
+  name: beer-horoscope
+  namespace: beer-rec-system
+  labels:
+    app: beer-rec-app
+  annotations:
+    openshift.io/host.generated: 'true'
+    argocd.argoproj.io/sync-wave: "2"
+spec:
+  to:
+    kind: Service
+    name: beer-rec-app
+    weight: 100
+  port:
+    targetPort: ports
+  wildcardPolicy: None
+
