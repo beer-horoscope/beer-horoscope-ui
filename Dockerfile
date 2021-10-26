@@ -6,8 +6,8 @@ USER root
 RUN chmod g+rwx /var/cache/nginx /var/run /var/log/nginx
 EXPOSE 8081
 
-COPY src/nginx.conf /etc/nginx/nginx.conf
-COPY src/default.conf /etc/nginx/conf.d/default.conf
+COPY nginx.conf /etc/nginx/nginx.conf
+COPY default.conf /etc/nginx/conf.d/default.conf
 COPY dist /usr/share/nginx/html
 
 USER nginx
