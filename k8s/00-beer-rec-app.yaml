@@ -24,7 +24,7 @@ spec:
           - containerPort: 8081
         env:
           - name: BACKEND
-            value: "beer-rec-rest-api.beer-rec-system:5000"
+            value: "beer-horoscope-api.beer-rec-system:5000"
 ---
 
 apiVersion: v1
