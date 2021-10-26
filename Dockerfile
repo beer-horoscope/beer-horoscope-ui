@@ -1,4 +1,4 @@
-FROM nginx:latest
+FROM registry.redhat.io/rhel8/nginx-116:latest
 
 USER root
 
