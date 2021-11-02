@@ -1,5 +1,6 @@
 <template>
   <div class="home">
+    <p>HI, NEW CHANGES</p>
     <BeerRecForm></BeerRecForm>
   </div>
 </template>
